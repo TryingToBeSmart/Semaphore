@@ -9,7 +9,7 @@
 #define MAX_USERS 10
 #define TOTAL_USERS 50
 
-int balance = 0;
+int currentAmountOfUsers = 0;
 sem_t* semaphore;
 
 
@@ -23,18 +23,20 @@ void *connect(void *arg)
     // lock it down for 10 threads at a time
     sem_wait(semaphore);
 
+    currentAmountOfUsers = currentAmountOfUsers + 1;
+    printf("Current users: %d\n", currentAmountOfUsers);
     srand(time(NULL)); // Seed the random number generator with current time
     int random_time = rand() % 10 + 1; // Generate a random number between 1 and 10
-    printf("Thread #%d entered connection pool and waiting %d...", threadNumber, random_time);
-    tmp = balance;
-    tmp = tmp + 1;
-    balance = tmp;
+    printf("Thread #%d entered connection pool and waiting for %d seconds...\n", threadNumber, random_time);
+    
 
     // *** End of Critical region ***
     // Unlock
     sem_post(semaphore);
-    
+
     printf("Thread #%d exiting connection pool\n", threadNumber);
+    currentAmountOfUsers = currentAmountOfUsers - 1;
+    printf("Current users: %d\n", currentAmountOfUsers);
     return NULL;
 }
 
@@ -42,6 +44,7 @@ void *connect(void *arg)
 int main()
 {
     pthread_t tid[TOTAL_USERS];
+    int thread_args[TOTAL_USERS];
 
     // Create a semaphore to be used in the critical region, only 10 allowed at a time
     semaphore = sem_open("Semaphore", O_CREAT, 00644, 10);
@@ -54,13 +57,14 @@ int main()
     // Create threads (users) to connect to a database
     for(int i = 0; i < TOTAL_USERS; ++i)
     {
-        if(pthread_create(&tid[i], NULL, connect, NULL))
+        thread_args[i] = i;
+        if(pthread_create(&tid[i], NULL, connect, &i))
         {
             // if error
             printf("\n ERROR creating deposit thread %d\n", i);
             exit(1);
         }
-        else printf("Thread %d created\n", tid[i]);
+        else printf("Thread %d created\n", i);
     }
 
     // Wait for threads (users) to finish 
@@ -68,10 +72,10 @@ int main()
     {    
         if(pthread_join(tid[i], NULL))
         {
-            printf("\n ERROR joining thread %d\n", tid[i]);
+            printf("\n ERROR joining thread %d\n", i);
             exit(1);
         }  
-        else printf("Thread %d finished\n", tid[i]);  
+        else printf("Thread %d finished\n", i);  
     }
 
 
