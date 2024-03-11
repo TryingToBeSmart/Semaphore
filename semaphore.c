@@ -26,9 +26,6 @@ void *connect(void *arg)
     currentAmountOfUsers = currentAmountOfUsers + 1;
     printf("Current users: %d\n", currentAmountOfUsers);
 
-
-    // **FIX** NOT CREATING RANDOM NUMBERS CORRECTLY
-    srand(time(NULL)); // Seed the random number generator with current time
     int random_time = rand() % 10 + 1; // Generate a random number between 1 and 10
     printf("Thread #%d entered connection pool and waiting for %d seconds...\n", threadNumber, random_time);
     
@@ -48,6 +45,8 @@ int main()
 {
     pthread_t tid[TOTAL_USERS];
     int thread_args[TOTAL_USERS];
+    
+    srand(time(NULL)); // Seed the random number generator with current time
 
     // Create a semaphore to be used in the critical region, only 10 allowed at a time
     semaphore = sem_open("Semaphore", O_CREAT, 00644, 10);
