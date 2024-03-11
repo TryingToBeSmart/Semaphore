@@ -25,6 +25,9 @@ void *connect(void *arg)
 
     currentAmountOfUsers = currentAmountOfUsers + 1;
     printf("Current users: %d\n", currentAmountOfUsers);
+
+
+    // **FIX** NOT CREATING RANDOM NUMBERS CORRECTLY
     srand(time(NULL)); // Seed the random number generator with current time
     int random_time = rand() % 10 + 1; // Generate a random number between 1 and 10
     printf("Thread #%d entered connection pool and waiting for %d seconds...\n", threadNumber, random_time);
