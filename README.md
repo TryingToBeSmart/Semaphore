@@ -10,3 +10,11 @@ Then, when the threads are created using a for loop and pthread_create, they all
 Video:
 
 [![Semaphore video](./Screenshot/semaphore_video.png)](https://www.loom.com/share/529a9e4132354dc1bef3643f2e732a0b?sid=9f6ae12a-7944-4938-adeb-1221b240c993)
+
+## Mutex program
+
+This program shows how to restrict threads from entering a critical region of code by using a mutex. This only allows 1 thread to enter the critical region at a time because only the thread that has possession of the mutex can be in the critical region. pthread_mutex_init is used to initialize the mutex, pthread_mutex_lock is used to allow 1 thread in and then lock the region, and pthread_mutex_unlock is used when the thread is finished and then the next thread can get the mutex and enter the critical region.
+
+Video:
+
+[![Mutex video](./Screenshot/mutex_screenshot.png)](https://www.loom.com/share/fa1b7dae20f74160bd68f8136f08f27d?sid=676a55e8-2099-4fce-aa02-87e4c654ef98)
