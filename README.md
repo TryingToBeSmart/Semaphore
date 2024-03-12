@@ -9,4 +9,4 @@ Then, when the threads are created using a for loop and pthread_create, they all
 
 Video:
 
-[![Semaphore video](../Screenshot/semaphore_video.png)](https://www.loom.com/share/529a9e4132354dc1bef3643f2e732a0b?sid=9f6ae12a-7944-4938-adeb-1221b240c993)
+[![Semaphore video](./Screenshot/semaphore_video.png)](https://www.loom.com/share/529a9e4132354dc1bef3643f2e732a0b?sid=9f6ae12a-7944-4938-adeb-1221b240c993)
