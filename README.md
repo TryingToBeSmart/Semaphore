@@ -13,7 +13,7 @@ Video:
 
 ## Mutex program
 
-This ![mutex](./mutex.c) program shows how to restrict threads from entering a critical region of code by using a mutex. This only allows 1 thread to enter the critical region at a time because only the thread that has possession of the mutex can be in the critical region. pthread_mutex_init is used to initialize the mutex, pthread_mutex_lock is used to allow 1 thread in and then lock the region, and pthread_mutex_unlock is used when the thread is finished and then the next thread can get the mutex and enter the critical region.
+This [mutex](./mutex.c) program shows how to restrict threads from entering a critical region of code by using a mutex. This only allows 1 thread to enter the critical region at a time because only the thread that has possession of the mutex can be in the critical region. pthread_mutex_init is used to initialize the mutex, pthread_mutex_lock is used to allow 1 thread in and then lock the region, and pthread_mutex_unlock is used when the thread is finished and then the next thread can get the mutex and enter the critical region.
 
 Video:
 
